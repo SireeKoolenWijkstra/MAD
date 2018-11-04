@@ -48,6 +48,18 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new ArrayAdapter<URLView>(this, android.R.layout.simple_list_item_1,mURLView);
         mGridView.setAdapter(mAdapter);
+
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, GateToPortal.class);
+                intent.putExtra("url",mURLView.get(position).getUrl().toString());
+                startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
+
+            }
+        });
+
+        addURLAndTitle("https://www.google.com", "");
     }
 
     @Override

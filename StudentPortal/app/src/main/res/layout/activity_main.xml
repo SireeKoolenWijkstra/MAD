@@ -69,7 +69,8 @@
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultaat" />
+        app:layout_constraintTop_toBottomOf="@+id/resultaat"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addPortal"
