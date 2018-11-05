@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Game Backlog</string>
+    <string-array name="planets_array">
+    <item name="status_playing">Playing</item>
+    <item name="status_want_to_play">Want to play</item>
+    <item name="status_stalled">Stalled</item>
+    <item name="status_dropped">Dropped</item>
+    </string-array>
 </resources>
