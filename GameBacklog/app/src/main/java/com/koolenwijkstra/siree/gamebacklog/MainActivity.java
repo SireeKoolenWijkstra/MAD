@@ -1,22 +1,19 @@
 package com.koolenwijkstra.siree.gamebacklog;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.FloatingActionButton;
-import android.widget.Toast;
 
-import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-    private static final int SECOND_ACTIVITY_REQUEST_CODE = 66;
+public class MainActivity extends AppCompatActivity implements GameAdapter.GameClickListener{
+    private static final int NEW_GAME_ACTIVITY_REQUEST_CODE = 66;
+    private static final int EDIT_GAME_ACTIVITY_REQUEST_CODE = 69;
     final ArrayList<Game> gameOverzicht = new ArrayList<>();
     GameAdapter adapter;
 
@@ -25,11 +22,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         //bind de xml met het RecyclerView object in de code
         final RecyclerView mCardObject = (RecyclerView) findViewById(R.id.alleGamesOverzicht);
 
-        adapter = new GameAdapter(gameOverzicht, getApplicationContext());
+        adapter = new GameAdapter(gameOverzicht, getApplicationContext(), this);
 
         mCardObject.setAdapter(adapter);
 
@@ -38,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, GameInput.class);
-                startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
+                startActivityForResult(intent, NEW_GAME_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -82,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         // check that it is the SecondActivity with an OK result
-        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == NEW_GAME_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
 
                 // get String data from Intent
@@ -93,6 +89,35 @@ public class MainActivity extends AppCompatActivity {
                 gameOverzicht.add(new Game(returnNaam, returnPlatform, returnNotes, returnStatus));
                 adapter.notifyDataSetChanged();
             }
+        }else {
+            if (resultCode == RESULT_OK) {
+
+                // get String data from Intent
+                String returnNaam = data.getStringExtra("naam");
+                String returnPlatform = data.getStringExtra("platform");
+                String returnNotes = data.getStringExtra("notes");
+                int returnStatus = data.getIntExtra("status", 0);
+
+                gameOverzicht.get(requestCode - EDIT_GAME_ACTIVITY_REQUEST_CODE).setNaam(returnNaam);
+                gameOverzicht.get(requestCode - EDIT_GAME_ACTIVITY_REQUEST_CODE).setPlatform(returnPlatform);
+                gameOverzicht.get(requestCode - EDIT_GAME_ACTIVITY_REQUEST_CODE).setNotes(returnNotes);
+                gameOverzicht.get(requestCode - EDIT_GAME_ACTIVITY_REQUEST_CODE).setStatus(returnStatus);
+                adapter.notifyDataSetChanged();
+            }
         }
+    }
+
+    /**
+     * @param i
+     */
+    @Override
+    public void gameOnClick(int i) {
+        Intent intent = new Intent(MainActivity.this, GameInput.class);
+        Game gekozenGame = gameOverzicht.get(i);
+        intent.putExtra("naam", gekozenGame.naam);
+        intent.putExtra("platform", gekozenGame.platform);
+        intent.putExtra("notes", gekozenGame.notes);
+        intent.putExtra("status", gekozenGame.status);
+        startActivityForResult(intent, EDIT_GAME_ACTIVITY_REQUEST_CODE + i);
     }
 }

@@ -3,12 +3,10 @@ package com.koolenwijkstra.siree.gamebacklog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -19,11 +17,13 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
     private final Context context;
     ArrayList<Game> gameOverzicht;
 
-    public GameAdapter(ArrayList<Game> gameOverzicht, Context context){
+    final private GameClickListener mGameClickListener;
+
+    public GameAdapter(ArrayList<Game> gameOverzicht, Context context, GameClickListener mGameClickListener){
         this.gameOverzicht = gameOverzicht;
         this.context = context;
+        this.mGameClickListener = mGameClickListener;
     }
-
 
     @NonNull
     @Override
@@ -31,7 +31,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
         Context context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         //Inflate maakt van je XML een javaobject, je moet dus een verwijzing hebben naar waar je XML staat
-        View view = inflater.inflate(R.layout.looksgame, null);
+        View view = inflater.inflate(R.layout.cardview_makeup, null);
 
         // Return a new holder instance
         GameAdapter.ViewHolder viewHolder = new GameAdapter.ViewHolder(view);
@@ -57,7 +57,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
         return gameOverzicht.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView naam;
         TextView platform;
         TextView status;
@@ -69,6 +69,16 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
             platform = (TextView) itemView.findViewById(R.id.game_platform);
             //notes = (TextView) itemView.findViewById(R.id.notes);
             status = (TextView) itemView.findViewById(R.id.game_status);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view){
+            int clickedPosition = getAdapterPosition();
+            mGameClickListener.gameOnClick(clickedPosition);
+        }
+    }
+    public interface GameClickListener{
+        void gameOnClick (int i);
     }
 }

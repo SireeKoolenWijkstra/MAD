@@ -1,9 +1,11 @@
 package com.koolenwijkstra.siree.gamebacklog;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -13,8 +15,22 @@ public class GameInput extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameinput);
+
+        if (getIntent().getExtras()!= null) {
+            EditText naam = (EditText) findViewById(R.id.naam);
+            EditText platform = (EditText) findViewById(R.id.platform);
+            EditText notes = (EditText) findViewById(R.id.notes);
+            Spinner status = (Spinner) findViewById(R.id.inputStatus);
+
+            naam.setText(getIntent().getStringExtra("naam"));
+            platform.setText(getIntent().getStringExtra("platform"));
+            notes.setText(getIntent().getStringExtra("notes"));
+            status.setSelection(getIntent().getIntExtra("status", 0));
+
+        }
 
         Spinner spinner = (Spinner) findViewById(R.id.inputStatus);
         // Create an ArrayAdapter using the string array and a default spinner layout
