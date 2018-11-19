@@ -18,7 +18,7 @@ public class GameInput extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameinput);
-
+        // Als er al gegevens staan in de cardview, zet dan de nieuwe waarde die wordt meegegeven
         if (getIntent().getExtras()!= null) {
             EditText naam = (EditText) findViewById(R.id.naam);
             EditText platform = (EditText) findViewById(R.id.platform);

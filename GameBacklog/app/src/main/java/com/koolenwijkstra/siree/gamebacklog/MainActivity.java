@@ -12,6 +12,9 @@ import android.support.design.widget.FloatingActionButton;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements GameAdapter.GameClickListener{
+    // NEW_GAME_ACTIVITY_REQUEST_CODE wordt meegestuurd bij het klikken op de FAB
+    // EDIT_GAME_ACTIVITY_REQUEST_CODE wordt meegestuurd bij onclick op de cardview
+
     private static final int NEW_GAME_ACTIVITY_REQUEST_CODE = 66;
     private static final int EDIT_GAME_ACTIVITY_REQUEST_CODE = 69;
     final ArrayList<Game> gameOverzicht = new ArrayList<>();
@@ -24,11 +27,13 @@ public class MainActivity extends AppCompatActivity implements GameAdapter.GameC
 
         //bind de xml met het RecyclerView object in de code
         final RecyclerView mCardObject = (RecyclerView) findViewById(R.id.alleGamesOverzicht);
-
         adapter = new GameAdapter(gameOverzicht, getApplicationContext(), this);
-
         mCardObject.setAdapter(adapter);
 
+        /*
+        Wanneer op de fab wordt geklikt, dan opent een nieuw activity (GameInput)
+
+        */
         FloatingActionButton fabAdd = findViewById(R.id.voegToeGame);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,22 +50,21 @@ public class MainActivity extends AppCompatActivity implements GameAdapter.GameC
         mCardObject.setHasFixedSize(true);
 
          /*
-        Add a touch helper to the RecyclerView to recognize when a user swipes to delete a list entry.
-        An ItemTouchHelper enables touch behavior (like swipe and move) on each ViewHolder,
-        and uses callbacks to signal when a user is performing these actions.
+         Een touchhelper is nodig om te kunnen swipen. Het vraagt om een viewholder waar op geswiped wordt
+         en een richting waarin geswiped wordt. Callbacks worden gebruikt om aan te geven dat een gebruiker
+         aan het swipen is.
         */
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-
+            // wordt niet in app gebruikt
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder
                     target) {
                 return false;
             }
 
-            //Called when a user swipes left or right on a ViewHolder
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                //Get the index corresponding to the selected position
+                //position is de index van de viewholder die geswiped wordt
                 int position = (viewHolder.getAdapterPosition());
                 gameOverzicht.remove(position);
                 adapter.notifyItemRemoved(position);
@@ -73,15 +77,21 @@ public class MainActivity extends AppCompatActivity implements GameAdapter.GameC
 
     }
 
+    /**
+     * Wanneer er een activity wordt gestart, kan dit dmv de fab of dmv een onclick. Bij een fab, wordt de data die is ingevuld en
+     * meegestuurd(zie GameInput.java) ontvangen en toegevoegd aan een nieuwe gemaakte Game.
+     * Wanneer op een cardview wordt geklikt, dan wordt bij desbetreffende game de nieuwe waardes geset.
+     * @param requestCode is of NEW_GAME_ACTIVITY_REQUEST_CODE of EDIT_GAME_ACTIVITY_REQUEST_CODE + index van viewholder
+     * @param resultCode wordt gegenereerd door de app
+     * @param data instantie van Intent
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // check that it is the SecondActivity with an OK result
         if (requestCode == NEW_GAME_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
 
-                // get String data from Intent
                 String returnNaam = data.getStringExtra("naam");
                 String returnPlatform = data.getStringExtra("platform");
                 String returnNotes = data.getStringExtra("notes");
@@ -108,7 +118,9 @@ public class MainActivity extends AppCompatActivity implements GameAdapter.GameC
     }
 
     /**
-     * @param i
+     * bij een klik wordt er een intent aangemaakt en het scherm van GameInput getoond. De waarden van
+     * de gekozen game (op index i in de de arraylist van gameOverzicht) worden meegegeven.
+     * @param i index van viewholder
      */
     @Override
     public void gameOnClick(int i) {

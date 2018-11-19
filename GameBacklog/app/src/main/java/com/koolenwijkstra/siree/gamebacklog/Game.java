@@ -1,16 +1,24 @@
 package com.koolenwijkstra.siree.gamebacklog;
 
+import java.util.Date;
+
 public class Game {
     String naam;
     String platform;
     String notes;
     int status;
+    public Date date;
+
+    public Game() {
+        this.date = new Date();
+    }
 
     public Game(String naam, String platform, String notes, int status) {
         this.naam = naam;
         this.platform = platform;
         this.notes = notes;
         this.status = status;
+        this.date = new Date();
     }
 
     public String getNaam() {
