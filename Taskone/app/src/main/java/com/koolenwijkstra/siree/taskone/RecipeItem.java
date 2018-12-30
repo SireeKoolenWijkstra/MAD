@@ -5,6 +5,8 @@ import android.widget.ImageView;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class RecipeItem {
     @SerializedName("image_url")
     @Expose
@@ -14,20 +16,17 @@ public class RecipeItem {
     @Expose
     private String title;
 
-    //geeft url waar de ingredienten inztten
-    @SerializedName("f2f_url")
+    @SerializedName("recipe_id")
     @Expose
-    private String f2f_url;
+    private String id;
 
-    public RecipeItem(String image, String nameRecipe) {
-        this.image_url = image;
-        this.title = nameRecipe;
-    }
+    @SerializedName("ingredients")
+    @Expose
+    private List<String> ingredient;
 
     public String getImage() {
         return image_url;
     }
-
     public void setImage(String image) {
         this.image_url = image;
     }
@@ -35,16 +34,17 @@ public class RecipeItem {
     public String getNameRecipe() {
         return title;
     }
-
     public void setNameRecipe(String nameRecipe) {
         this.title = nameRecipe;
     }
 
-    public String getIngredients() {
-        return f2f_url;
+    public List<String> getIngredient() {
+        return ingredient;
+    }
+    public void setIngredient(List <String> ingredients) {
+        this.ingredient = ingredients;
     }
 
-    public void setIngredients(String ingredients) {
-        this.f2f_url = ingredients;
-    }
+    public String getId() {return id;}
+    public void setId(String id) {this.id = id;}
 }
