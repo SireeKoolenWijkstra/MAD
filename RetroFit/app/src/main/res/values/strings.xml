@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">RetroFit</string>
+    <string name="app_age">age: </string>
+    <string name="app_weight">weight in kilos: </string>
+    <string name="app_length">length in centimeters: </string>
+
+    <string name="app_date">Date: </string>
+    <string name="app_setdate">date</string>
+
+    <string name="app_fooditem">Gegeten: </string>
+    <string name="app_setfooditem">soort voedsel</string>
+
+    <string name="app_gram">Gewicht van voedsel: </string>
+    <string name="app_setgram">in grammen</string>
+
+    <string name="app_button">OK</string>
+
+    <string name="app_tabuser">USER</string>
+    <string name="app_tabdag">DAG</string>
+</resources>
