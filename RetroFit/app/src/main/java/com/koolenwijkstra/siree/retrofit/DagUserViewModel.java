@@ -1,62 +1,125 @@
 package com.koolenwijkstra.siree.retrofit;
 
-import android.arch.lifecycle.LifecycleOwner;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.support.annotation.NonNull;
+import android.util.Log;
 
+import java.sql.Date;
+import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class DagUserViewModel extends ViewModel {
-    private List<LiveData<Dag>> overviewDagen;
-    private MutableLiveData<User> userLiveData;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    public DagUserViewModel() {
-        ArrayList<FoodItemWeight> fiws1 = new ArrayList<>();
-        ArrayList<FoodItemWeight> fiws2 = new ArrayList<>();
+public class DagUserViewModel extends AndroidViewModel {
 
-        fiws1.add(new FoodItemWeight(new FoodItem("appel", 100),20));
-        fiws2.add(new FoodItemWeight(new FoodItem("appel", 100),20));
-        fiws2.add(new FoodItemWeight(new FoodItem("biefstuk", 200), 40));
+    private RetroFitRepository mRetroFitRepository;
 
-        Dag item1 = new Dag(new Date(), fiws1);
-        Dag item2 = new Dag(new Date(), fiws2);
+    private MutableLiveData<List<Dag>> overviewDagen = new MutableLiveData<List<Dag>>();
+    private LiveData<User> userLiveData;
 
-        overviewDagen = new ArrayList<LiveData<Dag>>();
-        add(item1);
-        add(item2);
-
-        User me = new User(30, 84, 174);
-        userLiveData = new MutableLiveData<User>();
-        userLiveData.setValue(me);
+    public DagUserViewModel (Application application) {
+        super(application);
+        mRetroFitRepository = new RetroFitRepository(application);
+        userLiveData = mRetroFitRepository.getUser();
+        overviewDagen.setValue(new ArrayList<Dag>());
+        requestData();
     }
 
+    LiveData<User> getUser() { return userLiveData;}
 
-    public List<LiveData<Dag>> getOverviewDagen() {
+    public void setUser(User user) {
+        mRetroFitRepository.update(user);
+    }
+
+    public LiveData<List<Dag>> getOverviewDagen() {
         return overviewDagen;
     }
 
-    public void setOverviewDagen(List<LiveData<Dag>> overviewDagen) {
-        this.overviewDagen = overviewDagen;
-    }
-
-    public MutableLiveData<User> getUserLiveData() {
-        return userLiveData;
-    }
-
-    public void setUserLiveData(MutableLiveData<User> userLiveData) {
+    public void setUser(MutableLiveData<User> userLiveData) {
         this.userLiveData = userLiveData;
     }
 
     public void add(Dag dag){
-        MutableLiveData mld= new MutableLiveData<Dag>();
-        mld.setValue(dag);
-        overviewDagen.add(mld);
+        overviewDagen.getValue().add(dag);
+        overviewDagen.setValue(overviewDagen.getValue());
+        writetodb();
     }
+
+    DagApiService service = DagApiService.retrofit.create(DagApiService.class);
+
+    private void requestData(){
+                /**
+         * Make an a-synchronous call by enqueing and definition of callbacks.
+         * Call<Dag> getDagen();
+         */
+        Call<List<Dag>> call = service.getDagen();
+
+        call.enqueue(new Callback<List<Dag>>() {
+            @Override
+            public void onResponse(Call<List<Dag>> call, Response<List<Dag>> response) {
+                List<Dag> dagen = response.body();
+                Log.v("Lijst van Dag", dagen.toString());
+                overviewDagen.setValue(dagen);
+            }
+
+            @Override
+            public void onFailure(Call<List<Dag>> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    public void initFakeDB() {
+        ArrayList<Dag> dagen = new ArrayList<Dag>();
+
+        ArrayList<FoodItemWeight> foodItemWeights = new ArrayList<>();
+        foodItemWeights.add(new FoodItemWeight(new FoodItem("appel", 40), 80));
+        foodItemWeights.add(new FoodItemWeight(new FoodItem("rozijnen", 90), 30));
+
+        dagen.add(new Dag(Date.valueOf("2019-01-01"), foodItemWeights));
+
+        ArrayList<FoodItemWeight> foodItemWeights2 = new ArrayList<>();
+        foodItemWeights2.add(new FoodItemWeight(new FoodItem("appel", 40), 80));
+        foodItemWeights2.add(new FoodItemWeight(new FoodItem("rozijnen", 90), 30));
+        foodItemWeights2.add(new FoodItemWeight(new FoodItem("biefstuk", 68), 80));
+
+        dagen.add(new Dag(Date.valueOf("2019-01-02"), foodItemWeights2));
+
+
+    }
+
+    public void writetodb(){
+
+        Call<List<Dag>> call1 = service.setDagen(overviewDagen.getValue());
+        call1.enqueue(new Callback<List<Dag>>() {
+            @Override
+            public void onResponse(Call<List<Dag>> call, Response<List<Dag>> response) {
+                Log.v("lijst van dagen ","Success " + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Dag>> call, Throwable t) {
+                Log.v("lijst van dagen ","So Sad " + t);
+                throw new Error (t);
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
 }
 
 

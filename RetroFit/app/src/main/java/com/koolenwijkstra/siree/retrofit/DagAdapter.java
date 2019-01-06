@@ -3,12 +3,20 @@ package com.koolenwijkstra.siree.retrofit;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DagAdapter extends RecyclerView.Adapter<DagAdapter.ViewHolder> {
     DagUserViewModel dagUserViewModel;
@@ -31,15 +39,15 @@ public class DagAdapter extends RecyclerView.Adapter<DagAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull DagAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.date.setText(DateFormat.getDateInstance().format(dagUserViewModel.getOverviewDagen().get(i).getValue().getDate()));
-        viewHolder.eatenCal.setText(Integer.toString(dagUserViewModel.getOverviewDagen().get(i).getValue().getCalories()));
-        viewHolder.neededCal.setText(Integer.toString(dagUserViewModel.getUserLiveData().getValue().neededCalories()));
+        viewHolder.date.setText(DateFormat.getDateInstance().format(dagUserViewModel.getOverviewDagen().getValue().get(i).getDate()));
+        viewHolder.eatenCal.setText(Integer.toString(dagUserViewModel.getOverviewDagen().getValue().get(i).getCalories()));
+        viewHolder.neededCal.setText(Integer.toString(dagUserViewModel.getUser().getValue().neededCalories()));
 
     }
 
     @Override
     public int getItemCount() {
-        return dagUserViewModel.getOverviewDagen().size();
+        return dagUserViewModel.getOverviewDagen().getValue().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -54,4 +62,8 @@ public class DagAdapter extends RecyclerView.Adapter<DagAdapter.ViewHolder> {
             neededCal = itemView.findViewById(R.id.neededCal);
         }
     }
+
+
+
+
 }

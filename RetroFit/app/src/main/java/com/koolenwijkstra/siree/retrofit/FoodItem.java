@@ -3,10 +3,18 @@ package com.koolenwijkstra.siree.retrofit;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class FoodItem implements Parcelable {
 
+    @SerializedName("name")
+    @Expose
     private String name;
+
     //calDensity means calories per 100 gram
+    @SerializedName("calDensity")
+    @Expose
     private int calDensity;
 
     public FoodItem(String name, int calDensity) {

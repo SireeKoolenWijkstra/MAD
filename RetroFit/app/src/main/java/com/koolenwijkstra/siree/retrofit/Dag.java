@@ -3,13 +3,21 @@ package com.koolenwijkstra.siree.retrofit;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Dag implements Parcelable {
-    
+
+    @SerializedName("date")
+    @Expose
     private Date date;
+
+    @SerializedName("foodItemWeights")
+    @Expose
     private ArrayList<FoodItemWeight> foodItemWeights;
 
     public Dag(Date date, ArrayList<FoodItemWeight> foodItemWeights) {

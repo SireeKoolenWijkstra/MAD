@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "185781952166",
+    "firebase_url": "https://retrofit-queenbe.firebaseio.com",
+    "project_id": "retrofit-queenbe",
+    "storage_bucket": "retrofit-queenbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185781952166:android:15690f5cd2f296fe",
+        "android_client_info": {
+          "package_name": "com.koolenwijkstra.siree.retrofit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185781952166-8hkk1jjo57gbm3lpjmmsk3v76e9so7ja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcKcmFcjC6R6PYnPphnTVPUOlwpsAY5B0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

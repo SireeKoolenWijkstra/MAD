@@ -1,16 +1,32 @@
 package com.koolenwijkstra.siree.retrofit;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.media.Image;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
+@Entity(tableName = "user_table")
 public class User {
 
+
+
+    @NonNull
+    @PrimaryKey
+    @ColumnInfo(name = "age")
     private int age;
+
+    @NonNull
+    @ColumnInfo(name = "weight")
     private int weight;
+
+    @NonNull
+    @ColumnInfo(name = "length")
     private int length;
 
-    public User(int age, int weight, int length) {
+    public User(@NonNull int age, @NonNull int weight, @NonNull int length) {
         this.age = age;
         this.weight = weight;
         this.length = length;

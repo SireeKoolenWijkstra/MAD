@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">RetroFit</string>
     <string name="app_age">age: </string>
+    <string name="app_setage">set age </string>
+
     <string name="app_weight">weight in kilos: </string>
+    <string name="app_setweight">set weight in kilos</string>
+
     <string name="app_length">length in centimeters: </string>
+    <string name="app_setlength"> set length in centimeters</string>
 
     <string name="app_date">Date: </string>
     <string name="app_setdate">date</string>
@@ -14,6 +19,7 @@
     <string name="app_setgram">in grammen</string>
 
     <string name="app_button">OK</string>
+    <string name="app_button2">KLIK</string>
 
     <string name="app_tabuser">USER</string>
     <string name="app_tabdag">DAG</string>

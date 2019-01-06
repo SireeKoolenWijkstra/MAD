@@ -29,6 +29,7 @@ public class FoodItemWeightAdapter extends RecyclerView.Adapter<FoodItemWeightAd
     public FoodItemWeightAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Context context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
+
         //Inflate maakt van je XML een javaobject, je moet dus een verwijzing hebben naar waar je XML staat
         View view = inflater.inflate(R.layout.onefooditem, null);
         FoodItemWeightAdapter.ViewHolder viewHolder = new FoodItemWeightAdapter.ViewHolder(view);
@@ -113,7 +114,7 @@ public class FoodItemWeightAdapter extends RecyclerView.Adapter<FoodItemWeightAd
     }
 
     public void addEmptyLine() {
-        foodItemWeights.add(new FoodItemWeight(new FoodItem("Put name food here", 100), 100));
+        foodItemWeights.add(new FoodItemWeight(new FoodItem("Put name food here", -1), 100));
         notifyDataSetChanged();
     }
 }

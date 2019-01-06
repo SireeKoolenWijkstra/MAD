@@ -1,5 +1,6 @@
 package com.koolenwijkstra.siree.retrofit;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,12 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class DagFragment extends Fragment {
     private static final int NEW_FOODITEM_ACTIVITY_REQUEST_CODE = 1;
 
     DagAdapter dagAdapter;
 
-    private DagUserViewModel viewModel = new DagUserViewModel();
+    private DagUserViewModel viewModel;
 
     public static DagFragment newInstance() {
         return new DagFragment();
@@ -38,6 +41,9 @@ public class DagFragment extends Fragment {
         mItemRecycler.setLayoutManager(layoutManager);
         mItemRecycler.setHasFixedSize(true);
 
+
+        viewModel = ViewModelProviders.of(this.getActivity()).get(DagUserViewModel.class);
+
         //dagAdapter voor activity_main
         dagAdapter = new DagAdapter(viewModel);
         mItemRecycler.setAdapter(dagAdapter);
@@ -51,6 +57,17 @@ public class DagFragment extends Fragment {
             }
         });
 
+        viewModel.getOverviewDagen().observe(this,new Observer<List<Dag>>() {
+            /**
+             * Called when the data is changed.
+             *
+             * @param dags The new data
+             */
+            @Override
+            public void onChanged(@Nullable List<Dag> dags) {
+                dagAdapter.notifyDataSetChanged();
+            }
+        });
 
         return rootView;
 
@@ -76,13 +93,5 @@ public class DagFragment extends Fragment {
             }
         }
     }
-
-    /**
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(DagUserViewModel.class);
-        // TODO: Use the ViewModel
-    }**/
 
 }

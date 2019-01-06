@@ -4,10 +4,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Property;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class FoodItemWeight implements Parcelable {
 
+    @SerializedName("foodItem")
+    @Expose
     private FoodItem fooditem;
+
     //gaat in grammen
+    @SerializedName("weight")
+    @Expose
     private int weight;
 
     public FoodItemWeight(FoodItem fooditem, int weight) {

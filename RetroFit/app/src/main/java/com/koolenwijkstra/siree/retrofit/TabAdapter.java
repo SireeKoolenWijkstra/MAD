@@ -6,13 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class UserFragmentAdapter extends FragmentPagerAdapter {
-
-    UserViewModel userViewModel;
+public class TabAdapter extends FragmentPagerAdapter {
 
     private Context mContext;
 
-    public UserFragmentAdapter(Context context, FragmentManager fm) {
+    public TabAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }
