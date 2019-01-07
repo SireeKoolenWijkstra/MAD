@@ -39,10 +39,12 @@ public class DagAdapter extends RecyclerView.Adapter<DagAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull DagAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.date.setText(DateFormat.getDateInstance().format(dagUserViewModel.getOverviewDagen().getValue().get(i).getDate()));
-        viewHolder.eatenCal.setText(Integer.toString(dagUserViewModel.getOverviewDagen().getValue().get(i).getCalories()));
-        viewHolder.neededCal.setText(Integer.toString(dagUserViewModel.getUser().getValue().neededCalories()));
 
+        Dag dag = dagUserViewModel.getOverviewDagen().getValue().get(i);
+
+        viewHolder.date.setText(DateFormat.getDateInstance().format(dag.getDate()));
+        viewHolder.eatenCal.setText(Integer.toString(dag.getCalories()));
+        viewHolder.neededCal.setText(Integer.toString(dagUserViewModel.getUser().getValue().neededCalories()));
     }
 
     @Override
@@ -62,8 +64,6 @@ public class DagAdapter extends RecyclerView.Adapter<DagAdapter.ViewHolder> {
             neededCal = itemView.findViewById(R.id.neededCal);
         }
     }
-
-
 
 
 }

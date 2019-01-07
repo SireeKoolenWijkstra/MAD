@@ -31,11 +31,10 @@ public class MainActivity extends AppCompatActivity {
         //bind de xml met de ViewPager voor de fragment
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setText(getResources().getText(R.string.app_tabdag));
+        tabLayout.getTabAt(1).setText(getResources().getText(R.string.app_tabuser));
 
     }
-
-
-
 
 
 }

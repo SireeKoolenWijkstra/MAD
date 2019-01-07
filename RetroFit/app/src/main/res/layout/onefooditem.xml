@@ -12,8 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_margin="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/app_fooditem"
+        app:layout_constraintBaseline_toBaselineOf="@id/setFoodItem"
         app:layout_constraintEnd_toStartOf="@+id/setFoodItem"
+        app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,6 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:ems="8"
+        android:gravity="start"
         android:hint="@string/app_setfooditem"
         android:inputType="text"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton2"
@@ -34,7 +39,9 @@
         android:layout_gravity="start"
         android:layout_margin="8dp"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/app_gram"
+        app:layout_constraintBaseline_toBaselineOf="@id/setgram"
         app:layout_constraintEnd_toStartOf="@+id/setgram"
         app:layout_constraintHorizontal_bias="0.265"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:ems="8"
         android:hint="@string/app_setgram"
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton2"
@@ -56,11 +65,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:focusable="true" />
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 
 </android.support.constraint.ConstraintLayout>

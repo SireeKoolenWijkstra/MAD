@@ -17,10 +17,10 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        if (i ==0){
-            return new UserFragment();
-        }else{
+        if (i == 0) {
             return new DagFragment();
+        } else {
+            return new UserFragment();
         }
 
     }

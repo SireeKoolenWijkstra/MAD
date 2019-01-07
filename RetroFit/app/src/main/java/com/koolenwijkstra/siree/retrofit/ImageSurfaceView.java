@@ -1,4 +1,5 @@
 package com.koolenwijkstra.siree.retrofit;
+
 import android.hardware.Camera;
 import android.content.Context;
 import android.view.SurfaceHolder;

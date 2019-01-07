@@ -59,10 +59,11 @@ public class FoodItemWeight implements Parcelable {
     /**
      * methode rekent de calorien per gegeten hoeveelheid grammen uit. Omdat de calDensity per 100 gram gaat
      * moet dit gedeeld worden door 100.
+     *
      * @return calorieen in totaal van hoeveelheid gegeten fooditem in grammen
      */
     public int getCalories() {
-        return (fooditem.getCalDensity() * weight)/100;
+        return (fooditem.getCalDensity() * weight) / 100;
     }
 
 

@@ -22,7 +22,7 @@ public class DagUserViewModel extends AndroidViewModel {
     private MutableLiveData<List<Dag>> overviewDagen = new MutableLiveData<List<Dag>>();
     private LiveData<User> userLiveData;
 
-    public DagUserViewModel (Application application) {
+    public DagUserViewModel(Application application) {
         super(application);
         mRetroFitRepository = new RetroFitRepository(application);
         userLiveData = mRetroFitRepository.getUser();
@@ -30,7 +30,9 @@ public class DagUserViewModel extends AndroidViewModel {
         requestData();
     }
 
-    LiveData<User> getUser() { return userLiveData;}
+    LiveData<User> getUser() {
+        return userLiveData;
+    }
 
     public void setUser(User user) {
         mRetroFitRepository.update(user);
@@ -44,7 +46,7 @@ public class DagUserViewModel extends AndroidViewModel {
         this.userLiveData = userLiveData;
     }
 
-    public void add(Dag dag){
+    public void add(Dag dag) {
         overviewDagen.getValue().add(dag);
         overviewDagen.setValue(overviewDagen.getValue());
         writetodb();
@@ -52,8 +54,8 @@ public class DagUserViewModel extends AndroidViewModel {
 
     DagApiService service = DagApiService.retrofit.create(DagApiService.class);
 
-    private void requestData(){
-                /**
+    private void requestData() {
+        /**
          * Make an a-synchronous call by enqueing and definition of callbacks.
          * Call<Dag> getDagen();
          */
@@ -63,13 +65,13 @@ public class DagUserViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<List<Dag>> call, Response<List<Dag>> response) {
                 List<Dag> dagen = response.body();
-                Log.v("Lijst van Dag", dagen.toString());
+                //Log.v("Lijst van Dag", dagen.toString());
                 overviewDagen.setValue(dagen);
             }
 
             @Override
             public void onFailure(Call<List<Dag>> call, Throwable t) {
-
+                Log.v("requestData niet goed", t.toString());
             }
         });
 
@@ -95,29 +97,22 @@ public class DagUserViewModel extends AndroidViewModel {
 
     }
 
-    public void writetodb(){
+    public void writetodb() {
 
         Call<List<Dag>> call1 = service.setDagen(overviewDagen.getValue());
         call1.enqueue(new Callback<List<Dag>>() {
             @Override
             public void onResponse(Call<List<Dag>> call, Response<List<Dag>> response) {
-                Log.v("lijst van dagen ","Success " + response.body());
+                Log.v("lijst van dagen ", "Success " + response.body());
             }
 
             @Override
             public void onFailure(Call<List<Dag>> call, Throwable t) {
-                Log.v("lijst van dagen ","So Sad " + t);
-                throw new Error (t);
+                Log.v("lijst van dagen ", "So Sad " + t);
+                throw new Error(t);
             }
         });
     }
-
-
-
-
-
-
-
 
 
 }

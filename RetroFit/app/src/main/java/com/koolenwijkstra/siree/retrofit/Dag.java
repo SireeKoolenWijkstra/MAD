@@ -25,6 +25,10 @@ public class Dag implements Parcelable {
         this.foodItemWeights = foodItemWeights;
     }
 
+    /**
+     * Dag is Parcelable gemaakt omdat dag middels intent wordt doorgegeven. Zie de DagFragment line 92
+     * @param in
+     */
     protected Dag(Parcel in) {
         // Read Long value and convert to date
         date = new Date(in.readLong());
@@ -58,11 +62,16 @@ public class Dag implements Parcelable {
     public void setFoodItemWeights(ArrayList<FoodItemWeight> foodItemWeights) {
         this.foodItemWeights = foodItemWeights;
     }
-    
-    public int getCalories(){
+
+    /**
+     *
+     * @return returned alle gegeten calorieën op een dag
+     */
+
+    public int getCalories() {
         int totalCalories = 0;
-        for (FoodItemWeight food:foodItemWeights) {
-             totalCalories = totalCalories + food.getCalories();
+        for (FoodItemWeight food : foodItemWeights) {
+            totalCalories = totalCalories + food.getCalories();
         }
         return totalCalories;
     }

@@ -40,22 +40,6 @@ public class DagInput extends AppCompatActivity {
         mItemRecycler.setAdapter(adapter);
         adapter.addEmptyLine();
 
-/**
-
-
-
-
-                if (getIntent().getExtras()!= null) {
-            EditText date = (EditText) findViewById(R.id.setDate);
-            EditText name = (EditText) findViewById(R.id.setFoodItem);
-            EditText weight = (EditText) findViewById(R.id.setgram);
-
-            date.setText(getIntent().getStringExtra("date"));
-            name.setText(getIntent().getStringExtra("name"));
-            weight.setText(getIntent().getStringExtra("weight"));
-        }
-
- **/
         Button upload = findViewById(R.id.button);
         upload.setOnClickListener(new View.OnClickListener() {
             @Override

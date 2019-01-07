@@ -62,7 +62,6 @@ public class FoodItem implements Parcelable {
     }
 
 
-
     /**
      * Describe the kinds of special objects contained in this Parcelable
      * instance's marshaled representation. For example, if the object will

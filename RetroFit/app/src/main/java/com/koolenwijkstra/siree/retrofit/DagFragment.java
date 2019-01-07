@@ -31,7 +31,7 @@ public class DagFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-         View rootView = inflater.inflate(R.layout.dag_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.dag_fragment, container, false);
 
         //bind de xml met het RecyclerView object in de code
         final RecyclerView mItemRecycler = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -57,7 +57,8 @@ public class DagFragment extends Fragment {
             }
         });
 
-        viewModel.getOverviewDagen().observe(this,new Observer<List<Dag>>() {
+        //voor als de lijst met dagen is veranderd.
+        viewModel.getOverviewDagen().observe(this, new Observer<List<Dag>>() {
             /**
              * Called when the data is changed.
              *
@@ -65,6 +66,21 @@ public class DagFragment extends Fragment {
              */
             @Override
             public void onChanged(@Nullable List<Dag> dags) {
+
+                dagAdapter.notifyDataSetChanged();
+            }
+        });
+
+        //als de user is veranderd
+        viewModel.getUser().observe(this, new Observer<User>() {
+            /**
+             * Called when the data is changed.
+             *
+             * @param user The new data
+             */
+            @Override
+            public void onChanged(@Nullable User user) {
+
                 dagAdapter.notifyDataSetChanged();
             }
         });
@@ -76,9 +92,10 @@ public class DagFragment extends Fragment {
     /**
      * Wanneer er op de button wordt geklikt, wordt een nieuw activity gestart. Je wordt doorgezet
      * naar een DagInput waarna een Dag wordt geretourneerd.
+     *
      * @param requestCode is of NEW_FOODITEM_ACTIVITY_REQUEST_CODE
-     * @param resultCode wordt gegenereerd door de app
-     * @param data instantie van Intent
+     * @param resultCode  wordt gegenereerd door de app
+     * @param data        instantie van Intent
      */
 
     @Override

@@ -9,29 +9,30 @@
     <FrameLayout
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="wrap_content"/>
 
     <Button
-
+        android:id="@+id/camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_button2"
-        android:id="@+id/camera"
-        android:layout_below="@+id/camera_preview"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp" />
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/app_button2"
+        app:layout_constraintBottom_toBottomOf="@+id/foto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/foto" />
 
 
     <ImageView
         android:id="@+id/foto"
-        android:layout_width="152dp"
-        android:layout_height="120dp"
-        android:layout_margin="32dp"
-        android:adjustViewBounds="false"
-        android:background="@color/colorBackgroundDark"
-        android:cropToPadding="false"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_margin="16dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/pasfoto" />

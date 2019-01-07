@@ -58,13 +58,13 @@ public class FoodItemWeightAdapter extends RecyclerView.Adapter<FoodItemWeightAd
             }
 
             /**
-             * calDensity is -1 want dit is een bogus getal, calDensity staat vast in de database. User hoeft die
+             * calDensity is 10, dit is een bogus getal, calDensity staat vast in de database. User hoeft die
              * niet te weten en ook niet in tevullen. Is alleen nodig voor constructor FoodItem
              * @param s is string in editview
              */
             @Override
             public void afterTextChanged(Editable s) {
-                foodItemWeights.get(i).setFooditem(new FoodItem(s.toString(), -1));
+                foodItemWeights.get(i).setFooditem(new FoodItem(s.toString(), 10));
             }
         });
 
@@ -113,8 +113,10 @@ public class FoodItemWeightAdapter extends RecyclerView.Adapter<FoodItemWeightAd
         }
     }
 
+    //calDensity is bogusgetal.
+
     public void addEmptyLine() {
-        foodItemWeights.add(new FoodItemWeight(new FoodItem("Put name food here", -1), 100));
+        foodItemWeights.add(new FoodItemWeight(new FoodItem("Put name food here", 10), 100));
         notifyDataSetChanged();
     }
 }

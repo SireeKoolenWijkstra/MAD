@@ -12,7 +12,6 @@ import android.widget.ImageView;
 public class User {
 
 
-
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "age")
@@ -57,7 +56,7 @@ public class User {
         this.length = length;
     }
 
-    public int neededCalories(){
+    public int neededCalories() {
         int bmr = (int) ((10.0 * weight + 6.25 * length - 5.0 * age) * 1.4);
 
         return bmr;

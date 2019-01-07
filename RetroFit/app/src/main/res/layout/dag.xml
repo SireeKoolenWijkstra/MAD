@@ -16,39 +16,101 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp">
+            android:layout_margin="4dp">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/linlaydate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/dateCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_toRightOf="@+id/eatenCal"
+                    android:text="@string/app_date"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
 
 
-            <TextView
-                android:id="@+id/date"
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_toRightOf="@+id/eatenCal"
+                    android:text="@string/app_age"
+                    android:textColor="@android:color/black"
+                    android:textSize="22sp" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+
+            <View style="@style/Divider" />
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/linlayeatenCal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_age"
-                android:textColor="@android:color/black"
-                android:textSize="22sp"
-                android:layout_toRightOf="@+id/eatenCal"
-                android:layout_alignParentStart= "true"/>
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/eatenCal"
+                <TextView
+                    android:id="@+id/eatenCalCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/app_eatenCal"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/eatenCal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/app_age"
+                    android:textColor="@android:color/black"
+                    android:textSize="22sp" />
+
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+
+            <View style="@style/Divider" />
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/linlayneededCal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_age"
-                android:textColor="@android:color/holo_blue_bright"
-                android:textSize="22sp"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical">
 
-                android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:id="@+id/neededCalCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/app_neededCal"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
 
 
+                <TextView
+                    android:id="@+id/neededCal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/app_age"
+                    android:textColor="@android:color/black"
+                    android:textSize="22sp" />
 
-            <TextView
-                android:id="@+id/neededCal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_age"
-                android:textColor="@android:color/holo_orange_dark"
-                android:textSize="22sp"
-                android:layout_alignParentEnd= "true"/>
+            </android.support.v7.widget.LinearLayoutCompat>
+
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

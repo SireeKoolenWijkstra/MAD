@@ -3,6 +3,7 @@ package com.koolenwijkstra.siree.retrofit;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
@@ -13,12 +14,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -83,6 +86,14 @@ public class UserFragment extends Fragment {
                 mViewModel.setUser(new User(Integer.parseInt(mEditage.getText().toString())
                         , Integer.parseInt(mEditweight.getText().toString())
                         , Integer.parseInt(mEditlength.getText().toString())));
+
+                Context context = getActivity();
+                CharSequence text = "Your user data has been sent to the local storage";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 500);
+                toast.show();
             }
         });
         return rootView;
@@ -98,4 +109,4 @@ public class UserFragment extends Fragment {
     }
 
 
-    }
+}

@@ -23,4 +23,8 @@
 
     <string name="app_tabuser">USER</string>
     <string name="app_tabdag">DAG</string>
+    <string name="app_neededCal">Daily allowed</string>
+    <string name="app_eatenCal">Eaten</string>
+
+
 </resources>

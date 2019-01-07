@@ -15,24 +15,24 @@ public class RetroFitRepository {
         mUser = userDao.getUser();
     }
 
-    public LiveData<User> getUser(){
+    public LiveData<User> getUser() {
         return mUser;
     }
 
 
-    public void update (User user){
+    public void update(User user) {
         new updateAsyncTask(userDao).execute(user);
     }
 
     private class updateAsyncTask extends AsyncTask<User, Void, Void> {
         private UserDao mAsyncTaskDao;
 
-        public updateAsyncTask(UserDao dao){
+        public updateAsyncTask(UserDao dao) {
             mAsyncTaskDao = dao;
         }
 
         @Override
-        protected Void doInBackground(final User... params){
+        protected Void doInBackground(final User... params) {
             mAsyncTaskDao.updateUser(params[0]);
             return null;
         }
